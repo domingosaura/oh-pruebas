@@ -1,0 +1,112 @@
+definitive server 128.140.71.19 ssh 10022
+git clone git@github.com:josej69git/ohmyphoto.git
+o mejor copiar el directorio-composer update: /var/www/html# sudo zip -r oh20082024.zip /var/www/oh
+
+instalar webmin y preferible cambiar de puerto
+
+/etc/php/8.3/apache2/php.ini activar extensiones
+extension=zip
+extension=gd
+memory_limit = 4096M
+upload_max_filesize = 100M
+max_file_uploads = 2000
+max_execution_time = 1200
+
+mysqld.cnf añadir skip-log-bin (puede variar segun version bbdd)
+
+/etc/apache2/sites-available/000-default.conf add virtualhost / añadir puerto en ports.conf si necesario
+<VirtualHost *:8081>
+        ServerAdmin webmaster@localhost
+        ServerName ohmy
+        DocumentRoot /var/www/ohmyphoto/public
+        <Directory /var/www/ohmyphoto/public/>
+            Options Indexes FollowSymLinks
+            AllowOverride All
+            Require all granted
+        </Directory>
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+/etc/apache2/sites-available/000-default-le-ssl.conf
+<VirtualHost *:443>
+        ServerAdmin webmaster@localhost
+        ServerName ohmyphoto.app
+        DocumentRoot /var/www/ohmyphoto.app/public
+        <Directory /var/www/ohmyphoto.app/public/>
+            Options Indexes FollowSymLinks
+            AllowOverride All
+            Require all granted
+        </Directory>
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+RewriteEngine on
+# Some rewrite rules in this file were disabled on your HTTPS site,
+# because they have the potential to create redirection loops.
+
+# RewriteCond %{SERVER_NAME} =ohmyphoto.app
+# RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
+
+ServerAlias www.ohmyphoto.app
+Include /etc/letsencrypt/options-ssl-apache.conf
+SSLCertificateFile /etc/letsencrypt/live/www.ohmyphoto.app/fullchain.pem
+SSLCertificateKeyFile /etc/letsencrypt/live/www.ohmyphoto.app/privkey.pem
+</VirtualHost>
+
+
+apt install -y php8.3-mbstring
+sudo apt install php8.3-bcmath
+sudo apt-get install php8.3-zip
+sudo apt-get install php8.3-imagick
+sudo apt-get install php8.3-gd
+
+sudo systemctl restart apache2
+sudo service apache2 restart
+
+desde webmin permisos completo a la carpeta recursivamente
+desde webmin permisos completo a todo dentro de la carpeta
+permisos a las carpetas en storage
+
+php artisan storage:link <- si ya hay un storage:link de otro servidor quitar la carpeta public/storage y rehacer
+
+
+https://laravel.com/docs/11.x/scheduling#running-the-scheduler
+CRON: cd /var/www/ohmyphoto.app && php artisan schedule:run >> /dev/null 2>&1
+php artisan schedule:work
+sudo ufw allow 587
+sudo ufw allow 465
+sudo ufw allow 443
+
+sudo ufw enable
+sudo nano /etc/ssh/sshd_config
+puerto ssh 10022
+PermitEmptyPasswords no
+PermitRootLogin no
+sudo ufw allow 10022/tcp comment 'Allow SSH'
+
+https://www.arsys.es/blog/instalar-fail2ban
+
+https://securityheaders.com/?q=ohmyphoto.app&followRedirects=on
+a2enmod headers
+<ifModule mod_headers.c>
+	Header set Strict-Transport-Security "max-age=31536000" env=HTTPS
+	Header always set X-Frame-Options "sameorigin"
+</ifModule>
+
+DB::raw("now()"), dos horas de diferencia
+
+******************************************************************************************************
+#root@vmi919281:/var/www/html# sudo zip -r oh20241128.zip /var/www/ohmyphoto.app.test
+
+cuidado con el APP_DEBUG=true en .env
+APP_ENV=production
+APP_DEBUG=false
+
+securizar servidor https://geekland.eu/12-formas-de-mejorar-la-seguridad-de-un-servidor-linux/
+https://stackoverflow.com/questions/6018270/prevent-builtwith-com-showing-what-my-site-is-built-with
+
+col- para pequeña col-md mediano para grande
+
+stripe clave M3m0LA3000+ mhex-kwzq-kyku-hgzy-pgvi
+paypal clave M3m0LA3000+
+
+https://www.youtube.com/channel/UCHamnvtHQxYvbXDPNw4lMkg

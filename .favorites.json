@@ -1,0 +1,26 @@
+[
+    {
+        "type": "File",
+        "name": "/var/www/ohmyphoto.app.test/app/Http/Utils.php",
+        "parent_id": null,
+        "workspaceRoot": "/var/www/ohmyphoto.app.test",
+        "workspacePath": "app/Http/Utils.php",
+        "id": "t9kUdHhWQKBbyCXo"
+    },
+    {
+        "type": "File",
+        "name": "/var/www/ohmyphoto.app.test/storage/logs/laravel.log",
+        "parent_id": null,
+        "workspaceRoot": "/var/www/ohmyphoto.app.test",
+        "workspacePath": "storage/logs/laravel.log",
+        "id": "ZHt06CvQ5wz7mIW2"
+    },
+    {
+        "type": "File",
+        "name": "/var/www/ohmyphoto.app.test/routes/web.php",
+        "parent_id": null,
+        "workspaceRoot": "/var/www/ohmyphoto.app.test",
+        "workspacePath": "routes/web.php",
+        "id": "59cTeSUxXsR4a132"
+    }
+]
