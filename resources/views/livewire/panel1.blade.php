@@ -7,12 +7,13 @@
                         Tienes {{ $numGalerias }} galerías, 
                         {{ $numFotos }} fotos y 
                         {{ $megasOcupadas }} Megas ocupados.
-
-
                     </h4>
                 </div>
             </div>
         </div>
+        <livewire:dashboard-charts />
     </div>
+
+
 </div>
 

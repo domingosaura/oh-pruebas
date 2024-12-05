@@ -58,6 +58,7 @@ use App\Http\Livewire\Auth\ResetPassword;
 use App\Http\Livewire\Dashboard\Index;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use App\Http\Controllers\ImpersonateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,6 +92,9 @@ Route::get('contratocliente/{idcontrato}/{md5}/{error?}', Contratocliente::class
 Route::get('datosdecliente/{user}/{cliente}/{md5}', Rellenarporcliente::class)->where('id', '[0-9]+')->name('rellenarporcliente');
 Route::get('/downloadgallery/{gallery}/{md5}',[DownloadGallery::class, 'process'])->name('downloads.process');
 Route::get('/downloadgallery2/{gallery}/{md5}/{_12}',[DownloadGallery::class, 'processprof'])->name('downloads.process2');
+
+Route::get('/impersonate/take/{id}', [ImpersonateController::class, 'take'])->name('impersonate.take');
+Route::get('/impersonate/leave', [ImpersonateController::class, 'leave'])->name('impersonate.leave');
 
 Route::group(['middleware' => 'auth'], function () {
     
